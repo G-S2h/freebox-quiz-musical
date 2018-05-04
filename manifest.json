@@ -1,0 +1,15 @@
+{
+	"name": "Quiz Musical",
+	"identifier": "com.gs2h.quizzmusical",
+	"description": "Saurez-vous deviner le titre de la chanson ?",
+	"entryPoints": {
+		"main": {
+			"file": "Main.qml",
+			"default": true
+		}
+	}, 
+	"capabilities": {
+			"net_wan": "required",
+			"net_lan": "required"
+		}
+}
