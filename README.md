@@ -16,3 +16,9 @@ L'application peut aussi être lancée sur le poste en local, mais il devient al
 ## En ajoutant une nouvelle application sur le FreeFactory
 Il suffit de se créer un compte sur le [FreeFactory](https://factory.free.fr/extranet/login.pl), de cliquer sur le bouton _Ajouter une nouvelle application..._ et de remplir les différents champs avant de soumettre l'archivre du projet freebox-quiz-musical.
 
+# Présentation de l'application
+
+![Menu](QuizmusicalAssets/mini_screenshot1.jpg)
+
+<img src="QuizmusicalAssets/screenshot1.jpg" style="width:140px;" />
+
