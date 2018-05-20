@@ -1,3 +1,4 @@
+import QtMultimedia 5.0
 import QtQuick 2.5
 
 Rectangle {
@@ -31,9 +32,14 @@ Rectangle {
 		highlight: Rectangle { color: 'dodgerblue'; }
 		
 		Keys.onReturnPressed: {
-			
+			audioplayer.source = playedSongsGrid.model.get(playedSongsGrid.currentIndex).preview;
 		}
 		Keys.onBackPressed: { gameOver.toMenu() }
+	}
+	
+	Audio {
+		id: audioplayer
+		autoPlay: true
 	}
 	
 	function setModelForGrid(items) {

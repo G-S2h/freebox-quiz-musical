@@ -1,6 +1,6 @@
 {
 	"name": "Quiz Musical",
-	"identifier": "com.gs2h.quizzmusical",
+	"identifier": "com.punkprog.quizmusical",
 	"description": "Saurez-vous deviner le titre de la chanson ?",
 	"entryPoints": {
 		"main": {

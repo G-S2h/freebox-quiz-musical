@@ -59,16 +59,23 @@ Rectangle {
 		cellHeight: (parent.height) / 2
 		delegate: Column {
 			width: currentSongsList.cellWidth 
-			height: currentSongsList.cellheight 
+			height: currentSongsList.cellheight
+			
 			Text {
 				text: title
-				font { pixelSize: 22 }
+				width: currentSongsList.cellWidth / 2
 				anchors.horizontalCenter: parent.horizontalCenter
+				font { pixelSize: 22; italic: true }
+				elide: Text.ElideRight
+				//wrapMode: Text.wordWrap;
 			}
 			Text {
 				text: artist
+				width: currentSongsList.cellWidth / 2
 				font { pixelSize: 20 }
 				anchors.horizontalCenter: parent.horizontalCenter
+				elide: Text.ElideRight
+				//wrapMode: Text.wordWrap;
 			}
 			
 		}
@@ -157,12 +164,12 @@ Rectangle {
 	 */
 	function cb_testSong() {
 		if(currentSongsModel.get(currentSongsList.currentIndex).id == currentSong.id) {
-			App.notifyUser('Bien !');
+			//App.notifyUser('Bien !');
 			setScore();
 			newRound();
 		}
 		else {
-			App.notifyUser('Nul !');
+			//App.notifyUser('Nul !');
 			countBad++;
 			newRound();
 		}

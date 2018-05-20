@@ -10,9 +10,11 @@ Application {
 	/* vars */
 	property Component menuComponent: Qt.createComponent('GameMenu.qml');
 	property Component gameComponent: Qt.createComponent('Game.qml');
+	property Component optionsComponent: Qt.createComponent('Options.qml');
 	
 	property Rectangle gameMenuObject;
 	property Rectangle gameObject;
+	property Rectangle optionsObject;
 	property Rectangle gameOverObject;
 	
 	GameMenu { Component.onCompleted: destroy() }
@@ -35,6 +37,12 @@ Application {
 		color: 'lightskyblue'
 		radius: 10
 		
+		Image {
+			source: 'images/globalBg.png';
+			fillMode: Image.Tile;
+			anchors.fill: parent
+		}
+		
 		Component.onCompleted: { setMenu() }
 		
 	}
@@ -43,8 +51,8 @@ Application {
 	function cb_menu(value) {
 		switch(value) {
 			case 'newgame':
-				console.log('DEBUG. New game...');
-				
+				if(optionsObject)
+					console.log(optionsObject.option_1);
 				if(gameComponent.status == Component.Ready) {
 					gameObject = gameComponent.createObject(wrapper);
 					gameObject.giveFocus();
@@ -57,8 +65,18 @@ Application {
 				gameMenuObject.destroy();
 			break;
 			case 'options':
-				console.log('DEBUG. Options...');
 				
+				if(optionsComponent.status == Component.Ready) {
+					if(optionsObject)
+						optionsObject.visible = true;
+					else
+						optionsObject = optionsComponent.createObject(wrapper);
+					optionsObject.giveFocus()
+				}
+				else {
+					console.log('Error. Could not load optionsComponent (status:', optionsComponent.status, ')):', optionsComponent.errorString());
+				}
+				gameMenuObject.destroy()
 			break;
 			case 'quit':
 				console.log('DEBUG. Exiting application...')
@@ -70,12 +88,12 @@ Application {
 	}
 	
 	function cb_gameover(items) {
-		gameObject.destroy();
+		gameObject.visible = false;
 		var component = Qt.createComponent('GameOver.qml');
 		
 		if(component.status == Component.Ready) {
 			gameOverObject = component.createObject(wrapper);
-			console.log(gameOverObject.setModelForGrid(items));
+			gameOverObject.setModelForGrid(items);
 			gameOverObject.giveFocus();
 			gameOverObject.toMenu.connect(cb_postGameOver)
 			
@@ -92,7 +110,6 @@ Application {
 	}
 	
 	function setMenu() {
-		console.log('DEBUG. Displaying menu...');
 		if (menuComponent.status == Component.Ready) {
 			gameMenuObject = menuComponent.createObject(wrapper);
 			gameMenuObject.giveFocus();
