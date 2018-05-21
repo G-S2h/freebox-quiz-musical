@@ -88,8 +88,10 @@ Rectangle {
 		}
 		Keys.onReturnPressed: {
 			cb_testSong();
-			if(playedSongsModel.count > 10)
+			if(playedSongsModel.count >= 10)
 				game.gameOver(playedSongsModel)	
+			else
+				newRound();
 		}
 		
 	}
@@ -178,14 +180,12 @@ Rectangle {
 	 */
 	function cb_testSong() {
 		if(currentSongsModel.get(currentSongsList.currentIndex).id == currentSong.id) {
-			App.notifyUser('Bien !');
-			setScore();
-			newRound();
+			//App.notifyUser('Bien !');
+			countGood++;
 		}
 		else {
-			App.notifyUser('Nul !');
+			//App.notifyUser('Nul !');
 			countBad++;
-			newRound();
 		}
 	}
 	
@@ -215,10 +215,6 @@ Rectangle {
 	function newRound() {
 		setCurrentSongs();
 		playSong();
-	}
-	
-	function setScore() {
-		countGood++;
 	}
 	
 }
