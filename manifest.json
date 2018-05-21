@@ -1,6 +1,6 @@
 {
 	"name": "Quiz Musical",
-	"identifier": "com.punkprog.quizmusical",
+	"identifier": "com.punkprog.quizmusicalfbx",
 	"description": "Saurez-vous deviner le titre de la chanson ?",
 	"entryPoints": {
 		"main": {

@@ -51,11 +51,13 @@ Application {
 	function cb_menu(value) {
 		switch(value) {
 			case 'newgame':
-				if(optionsObject)
-					console.log(optionsObject.option_1);
 				if(gameComponent.status == Component.Ready) {
-					gameObject = gameComponent.createObject(wrapper);
+					gameObject = gameComponent.createObject(wrapper, {progressBarPos: optionsObject ? optionsObject.progressBarPosition : 'center'});
 					gameObject.giveFocus();
+					
+					if(optionsObject)
+						gameObject.setProgressBar(optionsObject.progressBarVisibility, optionsObject.progressBarPosition);
+					
 					gameObject.cancelGame.connect(cb_cancelGame);
 					gameObject.gameOver.connect(cb_gameover);
 				}

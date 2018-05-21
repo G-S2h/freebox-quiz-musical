@@ -6,8 +6,8 @@ import fbx.ui.settings 1.0
 Rectangle {
 	id: optionsContainer
 	
-	property var option_1: false;
-	property var option_2: false;
+	property var progressBarVisibility: true;
+	property var progressBarPosition: 'center';
 	
 	width: parent.width * 0.75
 	height: 200
@@ -18,31 +18,31 @@ Rectangle {
 		showInfo: false
 		Entry {
 			anchors { left: parent.left; right: parent.right }
-			text: "Switch"
-			info: "Basic boolean value edition"
+			text: 'Afficher le lecteur'
+			info: 'Détermine l\'affichage du lecteur audio durant une partie.'
 			Switch {
-				checked: false
-				onClicked: option_1 = checked;
+				checked: true
+				onClicked: progressBarVisibility = checked;
 			}
 			
 		}
 		Entry {
-			text: "Position du lecteur"
-			info: "Détermine la position du lecteur audio durannt une partie"
+			text: 'Position du lecteur'
+			info: 'Détermine la position du lecteur audio durant une partie.'
 			Combo {
 			    items: ListModel {
-					ListElement { label: "Au centre"; value: "center" }
-					ListElement { label: "Au-dessus"; value: "above" }
-					ListElement { label: "En dessous"; value: "below" }
+					ListElement { label: 'Au centre'; value: 'center' }
+					ListElement { label: 'Au-dessus'; value: 'above' }
+					ListElement { label: 'En dessous'; value: 'below' }
 			    }
 				
-			    onSelected: console.log("Selected index", index, "value", value);
+			    onSelected: progressBarPosition = value;
 			}
 			
 		}
 	}
 	
-	Keys.onReturnPressed: { optionsContainer.visible = false; setMenu(); }
+	Keys.onBackPressed: { optionsContainer.visible = false; setMenu(); }
 	Keys.onEscapePressed: { optionsContainer.visible = false; setMenu(); }
 	
 	function giveFocus() {

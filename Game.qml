@@ -13,6 +13,8 @@ Rectangle {
 	anchors.centerIn: parent
 	color: 'lightseagreen'
 	
+	property var progressBarPos: 'below';
+	
 	signal gameOver (ListModel items)
 	signal cancelGame
 	
@@ -104,8 +106,13 @@ Rectangle {
 		id: currSongProgressBar
 		value: 0
 		height: 24
-		visible: true
-		anchors {top: parent.top; centerIn: parent} // Centered in
+		anchors {
+			top: (progressBarPos == 'center' || progressBarPos == 'below' ? (progressBarPos == 'below' ?parent.bottom : parent.top) : undefined) ; centerIn: (progressBarPos == 'center' ? parent : undefined);
+			bottom: (progressBarPos == 'above' ? parent.top : undefined)
+			left: (progressBarPos == 'above' || progressBarPos == 'below' ? parent.left : undefined)
+			right: (progressBarPos == 'above' || progressBarPos == 'below' ? parent.right : undefined)
+		}
+		//anchors {top: parent.top; centerIn: parent} // Centered in
 		//anchors { bottom: parent.top; right: parent.right; left: parent.left} // Over board
 		//anchors { top: parent.bottom; right: parent.right; left: parent.left} // Under board
 		
@@ -136,6 +143,10 @@ Rectangle {
 		currentSongsList.forceActiveFocus();
 	}
 	
+	function setProgressBar(option_visibility) {
+		if(!option_visibility)
+			currSongProgressBar.height = 0;
+	}
 	/* *** *** *** */
 	
 	/**
@@ -167,12 +178,12 @@ Rectangle {
 	 */
 	function cb_testSong() {
 		if(currentSongsModel.get(currentSongsList.currentIndex).id == currentSong.id) {
-			//App.notifyUser('Bien !');
+			App.notifyUser('Bien !');
 			setScore();
 			newRound();
 		}
 		else {
-			//App.notifyUser('Nul !');
+			App.notifyUser('Nul !');
 			countBad++;
 			newRound();
 		}
