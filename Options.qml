@@ -27,13 +27,13 @@ Rectangle {
 			
 		}
 		Entry {
-			text: "Genre"
-			info: "Le seul genre à utiliser pour le quiz"
+			text: "Position du lecteur"
+			info: "Détermine la position du lecteur audio durannt une partie"
 			Combo {
 			    items: ListModel {
-					ListElement { label: "HDMI"; value: "AudioOutportHdmi" }
-					ListElement { label: "SPDIF"; value: "AudioOutportSpdif" }
-					ListElement { label: "Analogique"; value: "AudioOutportAnalog" }
+					ListElement { label: "Au centre"; value: "center" }
+					ListElement { label: "Au-dessus"; value: "above" }
+					ListElement { label: "En dessous"; value: "below" }
 			    }
 				
 			    onSelected: console.log("Selected index", index, "value", value);
@@ -42,7 +42,7 @@ Rectangle {
 		}
 	}
 	
-	Keys.onReturnPressed: { optionsoptionsContainer.visible = false; setMenu(); }
+	Keys.onReturnPressed: { optionsContainer.visible = false; setMenu(); }
 	Keys.onEscapePressed: { optionsContainer.visible = false; setMenu(); }
 	
 	function giveFocus() {

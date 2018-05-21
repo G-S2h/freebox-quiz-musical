@@ -103,8 +103,11 @@ Rectangle {
 	ProgressBar {
 		id: currSongProgressBar
 		value: 0
+		height: 24
 		visible: true
-		anchors {top: parent.top; centerIn: parent}
+		anchors {top: parent.top; centerIn: parent} // Centered in
+		//anchors { bottom: parent.top; right: parent.right; left: parent.left} // Over board
+		//anchors { top: parent.bottom; right: parent.right; left: parent.left} // Under board
 		
 	}
 	
