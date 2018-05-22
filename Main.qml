@@ -43,6 +43,30 @@ Application {
 			anchors.fill: parent
 		}
 		
+		Rectangle {
+			id: tooltipBack
+			anchors { bottom: parent.bottom; left: parent.left; leftMargin: 5 }
+			height: 40
+			Row {
+				Column {
+					Image {
+						source: 'images/fbx_bt_retour.jpg'
+					}
+				}
+				Column {
+					Text {
+						text: 'Menu'
+						font.pixelSize: 20
+						font.bold: true
+						color: '#333'
+						lineHeight: 22
+					}
+				}
+			}
+			
+			
+		}
+		
 		Component.onCompleted: { setMenu() }
 		
 	}
@@ -64,6 +88,7 @@ Application {
 				else {
 					console.log('Error. Could not load gameComponent (status:', gameComponent.status, ')):', gameComponent.errorString());
 				}
+				tooltipBack.visible = true
 				gameMenuObject.destroy();
 			break;
 			case 'options':
@@ -78,10 +103,10 @@ Application {
 				else {
 					console.log('Error. Could not load optionsComponent (status:', optionsComponent.status, ')):', optionsComponent.errorString());
 				}
+				tooltipBack.visible = true;
 				gameMenuObject.destroy()
 			break;
 			case 'quit':
-				console.log('DEBUG. Exiting application...')
 				Qt.quit();
 			break;
 			default:
@@ -89,13 +114,14 @@ Application {
 		}
 	}
 	
-	function cb_gameover(items) {
+	function cb_gameover(items, score) {
 		gameObject.visible = false;
 		var component = Qt.createComponent('GameOver.qml');
 		
 		if(component.status == Component.Ready) {
 			gameOverObject = component.createObject(wrapper);
 			gameOverObject.setModelForGrid(items);
+			gameOverObject.setScore(score)
 			gameOverObject.giveFocus();
 			gameOverObject.toMenu.connect(cb_postGameOver)
 			
@@ -120,7 +146,7 @@ Application {
 		else {
 			console.log('Error. Could not load menuComponnent (status: ', menuComponent.status, '): ', menuComponent.errorString(), ')');
 		}
-		
+		tooltipBack.visible = false
 	}
 	
 }

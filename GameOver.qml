@@ -4,6 +4,8 @@ import QtQuick 2.5
 Rectangle {
 	id: gameOver
 	
+	property var score: 0
+	
 	signal toMenu
 	
 	anchors.centerIn: parent
@@ -15,7 +17,12 @@ Rectangle {
 	ListView {
 		id: playedSongsGrid
 		focus: true
-		
+		header: Row {
+				Text {
+					text: 'Partie terminée\tScore : '+ score +'/10\nListe des chansons jouées'
+					font.pixelSize: 16
+				}
+			}
 		clip: true
 		width: parent.width
 		height: parent.height
@@ -44,6 +51,10 @@ Rectangle {
 	
 	function setModelForGrid(items) {
 		playedSongsGrid.model = items;
+	}
+	
+	function setScore(score) {
+		gameOver.score = score;
 	}
 	
 	function giveFocus() {

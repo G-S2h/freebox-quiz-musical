@@ -12,10 +12,10 @@ Rectangle {
 	height: 200
 	anchors.centerIn: parent
 	color: 'lightseagreen'
-	
+	Component.onCompleted: game.gameOver(undefined, undefined)
 	property var progressBarPos: 'below';
 	
-	signal gameOver (ListModel items)
+	signal gameOver (ListModel items, var score)
 	signal cancelGame
 	
 	/* vars */
@@ -88,8 +88,10 @@ Rectangle {
 		}
 		Keys.onReturnPressed: {
 			cb_testSong();
-			if(playedSongsModel.count >= 10)
-				game.gameOver(playedSongsModel)	
+			if(playedSongsModel.count >= 10) {
+				game.gameOver(playedSongsModel, countGood)
+				App.notifyUser('Partie terminée !')
+			}
 			else
 				newRound();
 		}
@@ -114,9 +116,6 @@ Rectangle {
 			left: (progressBarPos == 'above' || progressBarPos == 'below' ? parent.left : undefined)
 			right: (progressBarPos == 'above' || progressBarPos == 'below' ? parent.right : undefined)
 		}
-		//anchors {top: parent.top; centerIn: parent} // Centered in
-		//anchors { bottom: parent.top; right: parent.right; left: parent.left} // Over board
-		//anchors { top: parent.bottom; right: parent.right; left: parent.left} // Under board
 		
 	}
 	
@@ -180,11 +179,11 @@ Rectangle {
 	 */
 	function cb_testSong() {
 		if(currentSongsModel.get(currentSongsList.currentIndex).id == currentSong.id) {
-			//App.notifyUser('Bien !');
+			App.notifyUser('Bonne réponse !');
 			countGood++;
 		}
 		else {
-			//App.notifyUser('Nul !');
+			App.notifyUser('Mauvaise réponse...');
 			countBad++;
 		}
 	}
