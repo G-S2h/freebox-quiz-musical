@@ -7,7 +7,7 @@ Rectangle {
 	id: optionsContainer
 	
 	property var progressBarVisibility: true;
-	property var progressBarPosition: 'center';
+	property var progressBarPosition: 'above';
 	
 	width: parent.width * 0.75
 	height: 200
@@ -31,8 +31,8 @@ Rectangle {
 			info: 'Détermine la position du lecteur audio durant une partie.'
 			Combo {
 			    items: ListModel {
-					ListElement { label: 'Au centre'; value: 'center' }
 					ListElement { label: 'Au-dessus'; value: 'above' }
+					ListElement { label: 'Au centre'; value: 'center' }
 					ListElement { label: 'En dessous'; value: 'below' }
 			    }
 				
@@ -51,6 +51,7 @@ Rectangle {
 	}
 	
 	Keys.onBackPressed: { optionsContainer.visible = false; setMenu(); }
+	Keys.onEscapePressed: { optionsContainer.visible = false; setMenu(); }
 	
 	function giveFocus() {
 		options.forceActiveFocus();

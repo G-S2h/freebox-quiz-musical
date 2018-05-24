@@ -1,6 +1,6 @@
 {
 	"name": "Quiz Musical",
-	"identifier": "com.punkprog.quizmusicalfbx",
+	"identifier": "com.haluwaapp.quizmusical",
 	"description": "Saurez-vous deviner le titre de la chanson ?",
 	"entryPoints": {
 		"main": {

@@ -13,7 +13,7 @@ Rectangle {
 	anchors.centerIn: parent
 	color: 'lightseagreen'
 	Component.onCompleted: game.gameOver(undefined, undefined)
-	property var progressBarPos: 'below';
+	property var progressBarPos: 'above';
 	
 	signal gameOver (ListModel items, var score)
 	signal cancelGame

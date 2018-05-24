@@ -76,11 +76,11 @@ Application {
 		switch(value) {
 			case 'newgame':
 				if(gameComponent.status == Component.Ready) {
-					gameObject = gameComponent.createObject(wrapper, {progressBarPos: optionsObject ? optionsObject.progressBarPosition : 'center'});
+					gameObject = gameComponent.createObject(wrapper, {progressBarPos: optionsObject ? optionsObject.progressBarPosition : 'above'});
 					gameObject.giveFocus();
 					
 					if(optionsObject)
-						gameObject.setProgressBar(optionsObject.progressBarVisibility, optionsObject.progressBarPosition);
+						gameObject.setProgressBar(optionsObject.progressBarVisibility);
 					
 					gameObject.cancelGame.connect(cb_cancelGame);
 					gameObject.gameOver.connect(cb_gameover);
