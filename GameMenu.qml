@@ -5,7 +5,7 @@ Rectangle {
 	id: gameMenu
 	
 	property var menuSelectionColors: ['darkorange', 'darkgoldenrod', 'orangered']
-	property var menuSelectionSounds: ['soundEffect_kickDrum1.mp3', 'soundEffect_kickDrum2.wav', 'soundEffect_kickDrum3.wav']
+    property var menuSelectionSounds: ['soundEffect_kickDrum1.wav', 'soundEffect_kickDrum3.wav', 'soundEffect_kickDrum3.wav']
 	
 	signal chosen(string value)
 	
@@ -66,16 +66,11 @@ Rectangle {
 			color: menuSelectionColors[gameMenuList.currentIndex]
 			border.color: 'aquamarine'
 			radius: 0
-			onYChanged: soundEffect1.play()
+            onYChanged: playSoundMenu(gameMenuList.currentIndex)
 	        y: gameMenuList.currentItem.y
 	        Behavior on y {
 				
 	            ParallelAnimation {
-					
-					PropertyAnimation {
-						target: soundEffect1
-						property: 'play'
-					}
 					
 					SequentialAnimation {
 						NumberAnimation {
@@ -127,10 +122,14 @@ Rectangle {
 	}
 	
 	SoundEffect {
-		id: soundEffect1
-		source: 'sounds/'+ menuSelectionSounds[0]
+        id: menuSoundEffect
+        source: 'sounds/'+ menuSelectionSounds[0]
 	}
-	
+    function playSoundMenu(index) {
+        menuSoundEffect.source = 'sounds/'+ menuSelectionSounds[index]
+        menuSoundEffect.play()
+    }
+
 	function giveFocus() {
 		gameMenuList.forceActiveFocus()
 	}

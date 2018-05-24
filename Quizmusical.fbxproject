@@ -14,7 +14,7 @@ Project {
         directory: "."
     }
     Files {
-        filter: "qmldir;*.ttf;*.otf;*.woff"
+        filter: "qmldir;*.ttf;*.otf;*.woff;*.mp3;*.wav"
         directory: "."
         recursive: true
     }
