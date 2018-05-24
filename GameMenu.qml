@@ -5,7 +5,6 @@ Rectangle {
 	id: gameMenu
 	
 	property var menuSelectionColors: ['darkorange', 'darkgoldenrod', 'orangered']
-    property var menuSelectionSounds: ['soundEffect_kickDrum1.wav', 'soundEffect_kickDrum3.wav', 'soundEffect_kickDrum3.wav']
 	
 	signal chosen(string value)
 	
@@ -66,7 +65,7 @@ Rectangle {
 			color: menuSelectionColors[gameMenuList.currentIndex]
 			border.color: 'aquamarine'
 			radius: 0
-            onYChanged: playSoundMenu(gameMenuList.currentIndex)
+            onYChanged: menuSoundEffect.play()
 	        y: gameMenuList.currentItem.y
 	        Behavior on y {
 				
@@ -123,11 +122,7 @@ Rectangle {
 	
 	SoundEffect {
         id: menuSoundEffect
-        source: 'sounds/'+ menuSelectionSounds[0]
-	}
-    function playSoundMenu(index) {
-        menuSoundEffect.source = 'sounds/'+ menuSelectionSounds[index]
-        menuSoundEffect.play()
+        source: 'sounds/soundEffect_menuSel.wav'
     }
 
 	function giveFocus() {
