@@ -8,12 +8,16 @@ import 'JS/game.js' as GameJS
 
 Rectangle {
 	id: game
-	width: parent.width * 0.75
+	width: parent.width * 0.7
 	height: 200
 	anchors.centerIn: parent
 	color: 'lightseagreen'
 	Component.onCompleted: game.gameOver(undefined, undefined)
 	property var progressBarPos: 'above';
+	
+	property variant currentSong;
+	property int countGood: 0;
+	property int countBad: 0;
 	
 	signal gameOver (ListModel items, var score)
 	signal cancelGame
@@ -44,10 +48,6 @@ Rectangle {
 		id: playedSongsModel
 	}
 	
-	property variant currentSong;
-	property int countGood: 0;
-	property int countBad: 0;
-	
 	/* *** */
 	
 	GridView {
@@ -62,22 +62,20 @@ Rectangle {
 		delegate: Column {
 			width: currentSongsList.cellWidth 
 			height: currentSongsList.cellheight
-			
+            
 			Text {
-				text: title
-				width: currentSongsList.cellWidth / 2
+				text: '« '+ title +' »'
+                width: currentSongsList.cellWidth * 0.9
 				anchors.horizontalCenter: parent.horizontalCenter
-				font { pixelSize: 22; italic: true }
+                font { pixelSize: 22 }
 				elide: Text.ElideRight
-				//wrapMode: Text.wordWrap;
 			}
 			Text {
 				text: artist
-				width: currentSongsList.cellWidth / 2
+                width: currentSongsList.cellWidth / 2
 				font { pixelSize: 20 }
 				anchors.horizontalCenter: parent.horizontalCenter
 				elide: Text.ElideRight
-				//wrapMode: Text.wordWrap;
 			}
 			
 		}
@@ -118,7 +116,7 @@ Rectangle {
 		}
 		
 	}
-	
+	    
 	Timer {
 		id: currSongTimer
 		interval: 1000

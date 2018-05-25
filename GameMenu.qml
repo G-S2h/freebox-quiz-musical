@@ -8,8 +8,8 @@ Rectangle {
 	
 	signal chosen(string value)
 	
-	width: parent.width / 2
-	height: 300
+    width: parent.width * 0.6
+    height: 300
 	anchors.centerIn: parent
 	
 	color: 'aquamarine'
@@ -20,15 +20,15 @@ Rectangle {
 	ListModel {
 		id: gameMenuModel
 		ListElement {
-			label: 'Partie rapide';
+            label: 'PARTIE RAPIDE';
 			value: 'newgame';
 		}
 		ListElement {
-			label: 'Options';
+            label: 'OPTIONS';
 			value: 'options';
 		}
 		ListElement {
-			label: 'Quitter';
+            label: 'QUITTER';
 			value: 'quit';
 		}
 	}
@@ -45,7 +45,7 @@ Rectangle {
 			Text {
 				text: label
 				color: 'maroon'
-				font.pixelSize: 32
+                font.pixelSize: 30
 				font.family: 'Utopia'
 				anchors.centerIn: parent
 			}
