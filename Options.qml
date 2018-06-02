@@ -44,7 +44,7 @@ Rectangle {
 			text: 'À propos'
 			info: 'Quiz Musical est une application gratuite pour la Freebox.\n'+
 				  'Toutes les chansons sont issues d\'iTunes, Apple, via le générateur de flux RSS.\n'+
-				  'Les ressources (assets) proviennent de cooltext.com et de bg.siteorigin.com.\n'+
+				  'Les ressources (assets) proviennent de : bg.siteorigin.com ; cooltext.com ; freesound.org.\n'+
 				  'Le code source de l\'application est disponible sur: \n'+
 				  '\thttps://github.com/G-S2h/freebox-quiz-musical'
 		}
