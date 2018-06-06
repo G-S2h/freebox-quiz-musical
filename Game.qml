@@ -130,6 +130,27 @@ Rectangle {
         color: 'transparent'
         border.color: 'lightblue'
         border.width: 1
+        
+        property int counter: 30
+        Text {
+            id: gameProgressTimeText
+            anchors {
+                centerIn: parent
+            }
+            text: parent.counter
+            font {
+                pointSize: 32
+                bold: true
+            }
+            color: 'lime'
+        }
+
+        Timer {
+            interval: 1000
+            running: true
+            repeat: true
+            onTriggered: updateGameProgressTime()
+        }
     }
     
     Rectangle {
@@ -175,15 +196,7 @@ Rectangle {
             Keys.onBackPressed: {
                 game.cancelGame();
             }
-            Keys.onReturnPressed: {
-                cb_testSong();
-                if(playedSongsModel.count >= 10) {
-                    game.gameOver(playedSongsModel, countGood)
-                    //App.notifyUser('Partie terminée !')
-                }
-                else
-                    newRound();
-            }
+            Keys.onReturnPressed: checkSelectedSong()
         }
         
         ProgressBar {
@@ -256,27 +269,36 @@ Rectangle {
 	function playSong() {
 		audioplayer.source = currentSong.preview;
 	}
-
+    
+    function checkSelectedSong() {
+        cb_testSong();
+        if(playedSongsModel.count >= 10) {
+            game.gameOver(playedSongsModel, countGood)
+            //App.notifyUser('Partie terminée !')
+        }
+        else
+            newRound();
+    }
 	/**
 	 * Callback function when a song from currentSongsList is clicked
 	 */
 	function cb_testSong() {
 		if(currentSongsModel.get(currentSongsList.currentIndex).id == currentSong.id) {
             //App.notifyUser('Bonne réponse !');
-            updateGameProgress(countGood+countBad, true)
+            updateGameBoard(countGood+countBad, true)
             countGood++;
 		}
 		else {
             //App.notifyUser('Mauvaise réponse...');
-            updateGameProgress(countGood+countBad, false)
+            updateGameBoard(countGood+countBad, false)
             countBad++;
 		}
 		
 		setTimePause(500)
 	}
     
-    function updateGameProgress(questionCount, correct) {
-        var color = correct ? 'green' : 'red';
+    function updateGameBoard(questionCount, correct) {
+        var color = correct ? 'forestgreen' : 'firebrick';
         
         if(questionCount < 5) {
             gameBoardLeft.itemAt(4 - questionCount).color = color
@@ -297,6 +319,18 @@ Rectangle {
                 gameBoardRight.itemAt(8 - questionCount).border.color = 'gold'
                 gameBoardLeft.itemAt(8 - questionCount).opacity = 1
             }
+        }
+    }
+    
+    function updateGameProgressTime() {
+        gameProgressTime.counter -= 1;
+        if(gameProgressTime.counter < 20)
+            gameProgressTimeText.color = 'orangered';
+        if(gameProgressTime.counter < 10)
+            gameProgressTimeText.color = 'red';
+        
+        if(gameProgressTime.counter <= 0) {
+            checkSelectedSong();
         }
     }
     
@@ -326,6 +360,7 @@ Rectangle {
 	function newRound() {
 		setCurrentSongs();
 		playSong();
+		gameProgressTime.counter = 30;
 	}
 	
 	function setTimePause(duration) {
@@ -334,6 +369,4 @@ Rectangle {
 	}
 
 }
-
-
 
