@@ -147,6 +147,7 @@ Rectangle {
         }
 
         Timer {
+            id: gameProgressTimeTimer
             interval: 1000
             running: true
             repeat: true
@@ -275,6 +276,7 @@ Rectangle {
         cb_testSong();
         if(playedSongsModel.count >= 10) {
             game.gameOver(playedSongsModel, countGood)
+            gameProgressTimeTimer.running = false
             //App.notifyUser('Partie terminée !')
         }
         else

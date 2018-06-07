@@ -35,11 +35,6 @@ Rectangle {
             width: parent.cellWidth - 10
             height: parent.cellHeight
             
-            Column {
-                Text {
-                    text: '3 secondes'
-                }
-            }
 			Image {
                 anchors.horizontalCenter: parent.horizontalCenter
                 source: imageBig
