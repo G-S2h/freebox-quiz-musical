@@ -10,30 +10,51 @@ Rectangle {
 	
 	anchors.centerIn: parent
 	width: parent.width * 0.75
-	height: 300
+	height: 500
 	
 	color: 'lightseagreen'
 	
-	ListView {
+	GridView {
 		id: playedSongsGrid
 		focus: true
 		header: Row {
 				Text {
-					text: 'Partie terminée\tScore : '+ score +'/10\nListe des chansons jouées'
+					text: 'Partie terminée\t\tScore: '+ score +'/10\nListe des chansons jouées :'
 					font.pixelSize: 16
-				}
+                }
 			}
-		clip: true
-		width: parent.width
+		
+		width: parent.width < 900 ? parent.width : 900
 		height: parent.height
-		delegate: Row {
-			
-			width: parent.width
-			
-			Image { source: image }
+		anchors.horizontalCenter: parent.horizontalCenter
+		
+		cellWidth: 180
+		cellHeight: 220
+		clip: true
+		delegate: Column {
+            width: parent.cellWidth - 10
+            height: parent.cellHeight
+            
+            Column {
+                Text {
+                    text: '3 secondes'
+                }
+            }
+			Image {
+                anchors.horizontalCenter: parent.horizontalCenter
+                source: imageBig
+			}
 			Column {
-				Text { text: title }
-				Text { text: artist }
+				Text {
+                    width: playedSongsGrid.cellWidth * 0.9
+                    text: '« '+ title +' »'
+                    elide: Text.ElideRight
+				}
+				Text {
+                    width: playedSongsGrid.cellWidth * 0.9
+                    text: artist
+                    elide: Text.ElideRight
+				}
 			}
 		}
 		highlight: Rectangle { color: 'dodgerblue'; }

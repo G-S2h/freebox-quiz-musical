@@ -36,7 +36,8 @@ Rectangle {
 		XmlRole { name: 'artist'; query: 'im:artist/string()' }
 		XmlRole { name: 'title'; query: 'im:name/string()' }
 		XmlRole { name: 'preview'; query: 'link[2]/@href/string()' }
-		XmlRole { name: 'image'; query: 'im:image[2]/string()'}
+		XmlRole { name: 'image'; query: 'im:image[2]/string()' }
+		XmlRole { name: 'imageBig'; query: 'im:image[3]/string()' }
 
 		onStatusChanged: cb_loadingXml()
 	}
