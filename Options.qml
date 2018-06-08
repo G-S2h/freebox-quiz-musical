@@ -13,6 +13,19 @@ Rectangle {
 	height: 200
 	anchors.centerIn: parent
 	
+	Image {
+        id: logo
+        anchors {
+            bottom: parent.top
+            horizontalCenter: parent.horizontalCenter
+            bottomMargin: 3
+            rightMargin: 3
+            
+        }
+        source: 'images/banner.png'
+        width: parent.width / 2
+    }
+	
 	Page {
 		id: options
 		showInfo: false

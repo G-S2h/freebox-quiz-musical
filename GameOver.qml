@@ -10,17 +10,51 @@ Rectangle {
 	
 	anchors.centerIn: parent
 	width: parent.width * 0.75
-	height: 500
+	height: 490
 	
 	color: 'lightseagreen'
-	
+    
+    Rectangle {
+        anchors {
+            bottom: parent.top
+            horizontalCenter: parent.horizontalCenter
+        }
+        
+        Text {
+            anchors {
+                bottom: parent.top
+                horizontalCenter: parent.horizontalCenter
+            }
+            text: 'Partie Terminée'
+            color: 'white'
+            font.family: 'Helvetica'
+            font.pixelSize: 28
+            font.bold: true
+            font.capitalization: Font.SmallCaps
+        }
+    }
+
 	GridView {
 		id: playedSongsGrid
 		focus: true
 		header: Row {
+				height: 32
 				Text {
-					text: 'Partie terminée\t\tScore: '+ score +'/10\nListe des chansons jouées :'
+					text: 'Liste des chansons jouées'
+					color: 'white'
+					font.bold: true
 					font.pixelSize: 16
+					font.capitalization: Font.SmallCaps
+					width: gameOver.width / 2
+                }
+                Text {
+                    text: 'Score : '+ score +'/10'
+                    color: 'white'
+					font.bold: true
+					font.pixelSize: 16
+					font.capitalization: Font.SmallCaps
+					width: gameOver.width / 2 - 64
+                    horizontalAlignment: Text.AlignRight
                 }
 			}
 		

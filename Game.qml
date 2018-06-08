@@ -261,9 +261,11 @@ Rectangle {
 				loaderImage.visible = false;
 				setCurrentSongs();
 				playSong(currentSong);
+				gameProgressTime.counter = 30;
 			break;
 			case XmlListModel.Error:
 				console.log('Error. Could not load XML...');
+				gameProgressTimeTimer.running = false;
 			break;
 		}
 	}
@@ -277,7 +279,7 @@ Rectangle {
         if(playedSongsModel.count >= 10) {
             game.gameOver(playedSongsModel, countGood)
             gameProgressTimeTimer.running = false
-            //App.notifyUser('Partie terminée !')
+            App.notifyUser('Partie terminée !')
         }
         else
             newRound();
@@ -287,12 +289,12 @@ Rectangle {
 	 */
 	function cb_testSong() {
 		if(currentSongsModel.get(currentSongsList.currentIndex).id == currentSong.id) {
-            //App.notifyUser('Bonne réponse !');
+            App.notifyUser('Bonne réponse !');
             updateGameBoard(countGood+countBad, true)
             countGood++;
 		}
 		else {
-            //App.notifyUser('Mauvaise réponse...');
+            App.notifyUser('Mauvaise réponse...');
             updateGameBoard(countGood+countBad, false)
             countBad++;
 		}
@@ -364,6 +366,7 @@ Rectangle {
 		setCurrentSongs();
 		playSong();
 		gameProgressTime.counter = 30;
+		gameProgressTimeText.color = 'lime';
 	}
 	
 	function setTimePause(duration) {

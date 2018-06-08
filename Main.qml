@@ -42,7 +42,7 @@ Application {
 			fillMode: Image.Tile;
 			anchors.fill: parent
 		}
-		
+    
 		Rectangle {
 			id: tooltipBack
 			anchors { bottom: parent.bottom; left: parent.left; leftMargin: 5 }
